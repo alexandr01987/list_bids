@@ -1,0 +1,15 @@
+{% extends 'solvo_support/base.html' %}
+{% load solvo_support_extras %}
+
+{% block title %}Вызов процедур{% endblock %}
+
+{% block body %}
+
+<h1 class="text-center">Вызов вспомогательных процедур</h1>
+
+<ul>
+{% for procedure_name, procedure in procedures.items %}
+    <li><a href="{% url 'solvo-support:call-procedure' procedure_name %}">{{procedure_name}}</a></li>
+{% endfor %}
+</ul>
+{% endblock %}

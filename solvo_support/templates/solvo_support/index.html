@@ -1,0 +1,45 @@
+{% extends 'solvo_support/base.html' %}
+
+{% block title %} Главная страница {% endblock %}
+
+{% block body %}
+
+
+<div class="container h-100">
+  <div class="row h-100 justify-content-center align-items-center">
+    <form class="col-12">
+      <div class="form-group">
+
+          {% if user.is_authenticated %}
+
+              <h3>{{hello_word}} тебе, {{user.first_name|title}}</h3>
+
+              <br><br><br>
+
+              <h3>
+                  Welcome
+              </h3>
+
+          {% else %}
+
+              <h3>{{hello_word}} Тебе, посетитель</h3>
+              <br><br><br>
+
+              <p>
+                  Это сайт админов Солво ЕРЦ. Если необходим доступ к данному ресурсу - напиши заявку
+                  <a href="mailto:solvo_helpdesk@tdera.ru?subject=Предоставить доступ к сайту админов Солво">сюда</a>
+                  для предоставления логина и пароля. Необходимо указать в письме какой функционал требуется.
+              </p>
+
+              <p>
+                  Если доступ уже есть - вход <a href="{% url 'registration:login' %}">здесь</a>.
+              </p>
+
+          {% endif %}
+
+      </div>
+    </form>
+  </div>
+</div>
+
+{% endblock %}

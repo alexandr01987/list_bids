@@ -1,0 +1,105 @@
+{% extends 'solvo_support/base.html' %}
+
+{% block title %}Заявки {% endblock %}
+
+{% block body %}
+
+<script>
+
+$(document).ready( function () {
+        $('#list_requests').DataTable({
+            initComplete: function () {
+                this.api().columns().every( function () {
+                    var column = this;
+                    var select = $('<select><option value=""></option></select>')
+                        .appendTo( $(column.footer()).empty() )
+                        .on( 'change', function () {
+                            var val = $.fn.dataTable.util.escapeRegex(
+                                $(this).val()
+                            );
+
+                            column
+                                .search( val ? '^'+val+'$' : '', true, false )
+                                .draw();
+                        } );
+
+                    column.data().unique().sort().each( function ( d, j ) {
+                        select.append( '<option value="'+d+'">'+d+'</option>' )
+                    } );
+                } );
+            },
+            dom: 'Blfrtip',
+            buttons: ['copy', 'csv', 'pdf', 'print'],
+            "lengthMenu": [[15, 30, 50, -1], [15, 30, 50, "All"]],
+            "order": [[2, "desc"]]
+        });
+    }
+);
+
+</script>
+
+<h1 class="text-center">
+    {{h1_body_header}}
+</h1>
+
+<h5 class="text-right">
+
+    {% if type_requests == 'all' %}
+    <a href="{% url 'solvo-support:list-requests' 'everyone' type_requests %}">Просмотреть все заявки</a>
+    {% elif type_requests == 'error' %}
+    <a href="{% url 'solvo-support:list-requests' 'everyone' type_requests %}">Просмотреть все ошибки</a>
+    {% elif type_requests == 'revision' %}
+    <a href="{% url 'solvo-support:list-requests' 'everyone' type_requests %}">Просмотреть все доработки</a>
+    {% endif %}
+
+</h5>
+
+<table id="list_requests" class="hover" style="width:100%">
+
+    <thead>
+
+        <tr>
+            <th>Статус</th>
+            <th>Дата регистрации</th>
+            <th>Номер заявки</th>
+            <th>Тема</th>
+            <th>Последнее письмо</th>
+            <th>Дефект</th>
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+    {% for request in solvo_requests_list %}
+
+    <tr>
+
+        <td>{{ request.status }}</td>
+
+        <td>{{ request.solvo_registered_date|date:"Y-m-d" }}</td>
+
+        <td>{{ request.solvo_number }}</td>
+
+        <td><a href="{{request.get_absolute_url}}">{{request|truncatechars:100}}</a></td>
+
+        <td><a href="{{ request.get_last_email.get_absolute_url}}"  target="_blank">{{ request.get_last_email.date_received|date:"Y-m-d H:i" }}</a></td>
+
+        <td>
+
+        {% if request.is_defect_registered %}
+
+        <a href="{% url 'solvo-support:list-bugs' request.solvo_number %}">Зафиксирован</a>
+
+        {% endif %}
+
+        </td>
+
+    </tr>
+    {% endfor %}
+
+    </tbody>
+
+</table>
+
+{% endblock %}

@@ -1,0 +1,51 @@
+{% extends 'solvo_support/base.html' %}
+
+{% block title %}Аутентификация{% endblock %}
+
+{% block body %}
+
+{% if form.errors %}
+<p>Ваше имя или пароль не совпадает.</p>
+{% endif %}
+
+{% if next %}
+    {% if user.is_authenticated %}
+    <p>У вас нет доступа к этой странице. Необходимо авторизоваться под другой учётной записью</p>
+    {% else %}
+    <p>Пожалуйста авторизуйтесь для просмотра страницы</p>
+    {% endif %}
+{% endif %}
+
+
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+        <div class="card card-signin my-5">
+          <div class="card-body">
+            <h5 class="card-title text-center">Вход</h5>
+            <form class="form-signin" method="post" action="{% url 'registration:login' %}">
+            {% csrf_token %}
+              <div class="form-label-group">
+                <label for="id_username">Логин</label>
+                <input type="text" id="id_username" name="username" class="form-control" placeholder="Введите логин" required autofocus>
+              </div>
+
+              <div class="form-label-group">
+                <label for="id_password">Пароль</label>
+                <input type="password" id="id_password" name="password" class="form-control" placeholder="Введите пароль" required>
+              </div>
+                <br>
+              <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Войти</button>
+              <input type="hidden" name="next" value="{{next}}">
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+{# Assumes you setup the password_reset view in your URLconf #}
+{# <p><a href="{% url 'password_reset' %}">Lost password?</a></p>  #}
+
+{% endblock %}

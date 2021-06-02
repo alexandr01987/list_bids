@@ -1,0 +1,88 @@
+{% extends 'solvo_support/base.html' %}
+
+{% block title %}Заявка {{solvo_request.solvo_number}} {% endblock %}
+
+{% block body %}
+
+    <h1 class="text-center">{{ solvo_request }}</h1>
+
+    <div class="container-fluid">
+
+        <div class="row">
+
+            <div class="col-3">
+                <div class="text-right">
+                    <h4>
+                        Дата регистрации: <strong>{{solvo_request.solvo_registered_date|date:"Y-M-d"}}</strong>
+                    </h4>
+
+                    <h4>
+                        Статус: <strong>{{solvo_request.status}}</strong>
+                    </h4>
+
+                    {% if solvo_request.request_type == 'revision' %}
+                        <h4>
+
+                            Ч/ч: <strong>{{solvo_request.hours_for_develop|default_if_none:'Не указано'}}</strong>
+
+                            <br>
+
+                            Дата выполнения: <strong>{{solvo_request.deadline_date|date:"Y-M-d"|default:'Не указано'}}</strong>
+
+                        </h4>
+
+                    {% endif %}
+
+                </div>
+                <p>
+                    <a href="{{ solvo_request.get_last_email.get_absolute_url}}">Последнее письмо</a>
+                </p>
+                <p>
+                    <a href="{{ solvo_request.link_all_emails_by_request}}">Все письма по заявке</a>
+                </p>
+
+
+                <br>
+
+                <a href="{% url 'solvo-support:change-request' solvo_request.request_type solvo_request.solvo_number %}">Изменить заявку</a>
+
+                {% if bugs_by_request %}
+
+                <div>
+
+                    <br>
+
+                    <h4 class="text-center">Дефекты по заявке</h4>
+                        <ol>
+                        {% for bug in bugs_by_request %}
+                            <li>
+                                <a href="{{ bug.get_absolute_url }}">{{bug}}</a>
+                            </li>
+                         {% endfor %}
+                        </ol>
+                </div>
+
+                {% endif %}
+
+            </div>
+
+             <div class="col-9 border ml-auto bg-light d-flex align-items-center pd-5" style="min-height: 500px; max-height: 100%">
+
+
+                {% autoescape on %}
+
+                {{ solvo_request.description  | linebreaksbr }}
+
+                {% endautoescape %}
+
+                 <button type="button" formmethod="post"></button>
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+{% endblock %}
+

@@ -1,0 +1,27 @@
+{% extends 'solvo_support/list_requests.html' %}
+
+{% block title %}Поиск в письмах{% endblock %}
+
+{% block search %}
+
+<div class="container">
+
+    <h1 class="text-center">Поиск текста в письмах</h1>
+
+    <br>
+
+    <form method="post"  class="justify-content-center d-flex align-items-center pd-5"  style="min-height: 100px; max-height: 100%">
+
+        {% csrf_token %}
+
+        <input  id="search_box" type="text" name="search_box"  placeholder="Что искать?" >
+
+        <button id="search_submit" type="submit" >Найти</button>
+
+    </form>
+
+
+</div>
+
+{% endblock %}
+

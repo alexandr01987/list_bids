@@ -1,0 +1,61 @@
+{% extends 'solvo_support/base.html' %}
+
+{% block title %}Дефект{% endblock %}
+
+{% block body %}
+
+<h1 class="text-center" xmlns="http://www.w3.org/1999/html">Дефект {{bug}}</h1>
+
+<br>
+
+<div class="container">
+
+    <div class="row">
+
+        <div class="col">
+
+
+
+            <form method="post">
+
+                {% if perms.solvo_support.change_bugsolvo %}
+
+                {% csrf_token %}
+
+                {{ form.as_p }}
+
+                <input type="submit" value="Изменить">
+
+                {% else %}
+
+                <p>Зафиксирован: <strong>{{bug.date_registered}}</strong></p>
+
+                <p>Уровень критичности: <strong>{{bug.critical_state}}</strong></p>
+
+                <p>Статус: <strong>{{bug.status}}</strong></p>
+
+                {% endif %}
+
+            </form>
+
+        </div>
+
+        <div class="col">
+
+            <h2>Список заявок по дефекту</h2>
+
+                {% for request_solvo in list_request_by_bug %}
+
+                <p>
+                    <a href="{{request_solvo.get_absolute_url}}">{{request_solvo}}</a>
+                </p>
+
+                {% endfor %}
+        </div>
+
+    </div>
+
+</div>
+
+
+{% endblock %}

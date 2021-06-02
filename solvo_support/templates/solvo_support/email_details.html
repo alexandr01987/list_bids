@@ -1,0 +1,35 @@
+{% extends 'solvo_support/base.html' %}
+
+{% block title %}Электронное письмо {{ email_solvo }}{% endblock %}
+
+{% block body %}
+
+    <h1 class="text-center">Электронное письмо по заявке {{ email_solvo }}</h1>
+        <br>
+    <h2 class="text-center">Отправитель: {{ email_solvo.sender }}</h2>
+    <h2 class="text-center">{{ email_solvo.date_received }}</h2>
+        <br>
+    <div class="container-fluid">
+
+        <div class="row">
+
+         <div class="col-2">
+
+            <h3><a href="{{link_to_request}}">К заявке</a></h3>
+            <h3><a href="{% url 'solvo-support:list-emails' email_solvo.request_solvo.solvo_number%}">К списку писем</a></h3>
+
+        </div>
+
+            <div class="col border ml-auto bg-light">
+
+                {% autoescape on %}
+                {{ email_solvo.body_email | linebreaksbr }}
+                {% endautoescape %}
+
+            </div>
+
+        </div>
+
+    </div>
+
+{% endblock %}

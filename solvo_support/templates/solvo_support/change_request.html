@@ -1,0 +1,22 @@
+{% extends 'solvo_support/base.html' %}
+
+{% block title %}Заявка {{request_solvo.solvo_number}} {% endblock %}
+
+{% block body %}
+
+<h1 class="text-center"><a href="{{request_solvo.get_absolute_url}}">Заявка {{request_solvo.solvo_number}}</a></h1>
+
+<div class="container">
+
+    <form method="post">
+
+        {% csrf_token %}
+        {{ form.as_p }}
+
+        <input type="submit" value="Изменить">
+
+    </form>
+
+</div>
+
+{% endblock %}

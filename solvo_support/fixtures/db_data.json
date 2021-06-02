@@ -1,0 +1,173 @@
+[
+    {
+        "model": "solvo_support.bugcriticalsolvo",
+        "pk": 1,
+        "fields": {
+            "key_name": "l",
+            "ru_name": "низкий",
+            "days_for_fix": 60
+        }
+    },
+    {
+        "model": "solvo_support.bugcriticalsolvo",
+        "pk": 2,
+        "fields": {
+            "key_name": "m",
+            "ru_name": "средний",
+            "days_for_fix": 30
+        }
+    },
+    {
+        "model": "solvo_support.bugcriticalsolvo",
+        "pk": 3,
+        "fields": {
+            "key_name": "h",
+            "ru_name": "высокий",
+            "days_for_fix": 2
+        }
+    },
+    {
+        "model": "solvo_support.status",
+        "pk": 1,
+        "fields": {
+            "type_id": 1,
+            "status_key": "new",
+            "ru_status_name": "новая"
+        }
+    },
+    {
+        "model": "solvo_support.status",
+        "pk": 2,
+        "fields": {
+            "type_id": 1,
+            "status_key": "in_solvo",
+            "ru_status_name": "ожидаем ответ от Солво"
+        }
+    },
+    {
+        "model": "solvo_support.status",
+        "pk": 3,
+        "fields": {
+            "type_id": 1,
+            "status_key": "in_era",
+            "ru_status_name": "мы должны дать ответ"
+        }
+    },
+    {
+        "model": "solvo_support.status",
+        "pk": 4,
+        "fields": {
+            "type_id": 1,
+            "status_key": "solvo_wait_example",
+            "ru_status_name": "нужен пример для Солво"
+        }
+    },
+    {
+        "model": "solvo_support.status",
+        "pk": 5,
+        "fields": {
+            "type_id": 1,
+            "status_key": "resolved",
+            "ru_status_name": "решена"
+        }
+    },
+    {
+        "model": "solvo_support.status",
+        "pk": 6,
+        "fields": {
+            "type_id": 1,
+            "status_key": "closed",
+            "ru_status_name": "закрыта без решения"
+        }
+    },
+    {
+        "model": "solvo_support.status",
+        "pk": 7,
+        "fields": {
+            "type_id": 2,
+            "status_key": "estimating",
+            "ru_status_name": "оценивается"
+        }
+    },
+    {
+        "model": "solvo_support.status",
+        "pk": 8,
+        "fields": {
+            "type_id": 2,
+            "status_key": "matching",
+            "ru_status_name": "согласование"
+        }
+    },
+    {
+        "model": "solvo_support.status",
+        "pk": 9,
+        "fields": {
+            "type_id": 2,
+            "status_key": "developing_by_solvo",
+            "ru_status_name": "выполняется в Солво"
+        }
+    },
+    {
+        "model": "solvo_support.status",
+        "pk": 10,
+        "fields": {
+            "type_id": 2,
+            "status_key": "on_our_test",
+            "ru_status_name": "на нашем тесте"
+        }
+    },
+    {
+        "model": "solvo_support.status",
+        "pk": 11,
+        "fields": {
+            "type_id": 2,
+            "status_key": "done",
+            "ru_status_name": "выполнена"
+        }
+    },
+    {
+        "model": "solvo_support.status",
+        "pk": 12,
+        "fields": {
+            "type_id": 2,
+            "status_key": "not_actual",
+            "ru_status_name": "не актуальна"
+        }
+    },
+    {
+        "model": "solvo_support.status",
+        "pk": 13,
+        "fields": {
+            "type_id": 3,
+            "status_key": "registered",
+            "ru_status_name": "зарегистрирован"
+        }
+    },
+    {
+        "model": "solvo_support.status",
+        "pk": 14,
+        "fields": {
+            "type_id": 3,
+            "status_key": "fix_on_test",
+            "ru_status_name": "на нашем тесте"
+        }
+    },
+    {
+        "model": "solvo_support.status",
+        "pk": 15,
+        "fields": {
+            "type_id": 3,
+            "status_key": "fixed",
+            "ru_status_name": "исправлено"
+        }
+    },
+    {
+        "model": "solvo_support.status",
+        "pk": 16,
+        "fields": {
+            "type_id": 3,
+            "status_key": "canceled",
+            "ru_status_name": "отменён"
+        }
+    }
+]

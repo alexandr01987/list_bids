@@ -1,0 +1,51 @@
+{% extends 'solvo_support/base.html' %}
+
+{% block title %}Дефекты{% endblock %}
+
+{% block body %}
+
+<h1 class="text-center">Список дефектов {% if request_solvo %}по заявке {{request_solvo}} {% endif %} </h1>
+
+<script>
+
+$(document).ready( function () {
+        $('#table_list_bugs').DataTable({
+            "lengthMenu": [[10, 20, 50, -1], [10, 20, 50, "All"]],
+            "order": [[0, "desc"]],
+            columnDefs: [
+                {
+                    targets: 0,
+                    className: 'dt-center'
+                }
+            ],
+        });
+    }
+);
+
+</script>
+
+<table id="table_list_bugs" class="hover">
+    <thead>
+    <tr>
+        <td>Номер дефекта Солво</td>
+        <td>Дата фиксации</td>
+        <td>Название</td>
+        <td>Уровень критичности</td>
+        <td>Статус</td>
+    </tr>
+    </thead>
+
+    <tbody>
+        {% for bug in bugs %}
+        <tr>
+            <td>{{bug.solvo_number}}</td>
+            <td>{{bug.date_registered}}</td>
+            <td><a href="{{bug.get_absolute_url}}">{{bug.name}}</a></td>
+            <td>{{bug.critical_state}}</td>
+            <td>{{bug.status}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

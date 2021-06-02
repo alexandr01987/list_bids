@@ -1,0 +1,53 @@
+{% extends 'solvo_support/base.html' %}
+
+{% block title %}Письма{% endblock %}
+
+{% block body %}
+
+<script>
+
+$(document).ready( function () {
+        $('#table_list_email').DataTable({
+            "lengthMenu": [[15, 20, 50, -1], [15, 20, 50, "All"]],
+            "order": [[1, "desc"]]
+        });
+    }
+);
+
+</script>
+
+<h1 class="text-center">Список электронных писем
+    {% if solvo_number_request %}
+    по заявке <a href="{{request_solvo.get_absolute_url}}">{{solvo_number_request}}</a>
+    {% endif %}</h1>
+
+<div class="container">
+
+<table id="table_list_email" class="hover" style="width:100%">
+
+    <thead>
+
+        <tr>
+
+            <th>Отправитель</th>
+            <th>Дата получения</th>
+        </tr>
+
+    </thead>
+
+    <tbody>
+
+    {% for email in emails_solvo %}
+    <tr>
+        <td>{{ email.sender }}</td>
+        <td><a href="{{email.get_absolute_url}}">{{ email.date_received|date:"Y-m-d H:i:s" }}</a></td>
+    </tr>
+    {% endfor %}
+
+    </tbody>
+
+</table>
+
+</div>
+
+{% endblock %}
