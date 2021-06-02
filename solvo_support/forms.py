@@ -14,7 +14,7 @@ class FormError(forms.ModelForm):
             'subject': forms.TextInput(attrs={'size': 100, 'readonly': 'readonly'}),
             'description': forms.Textarea(attrs={'rows': 12, 'cols': 150}),
             'comment': forms.Textarea(attrs={'rows': 2, 'cols': 60}),
-            'era_critical_prior': forms.NumberInput(attrs={'min': 0, 'max': 200}),
+            'era_critical_prior': forms.NumberInput(attrs={'min': 0, 'max': 100}),
         }
         labels = {
             'solvo_number': 'Номер заявки Солво',
@@ -40,7 +40,7 @@ class FormRevision(forms.ModelForm):
             'comment': forms.Textarea(attrs={'rows': 3, 'cols': 60}),
             'hours_for_develop': forms.NumberInput(attrs={'min': 0}),
             'deadline_date': forms.SelectDateWidget(),
-            'era_critical_prior': forms.NumberInput(attrs={'min': 0, 'max': 200}),
+            'era_critical_prior': forms.NumberInput(attrs={'min': 0, 'max': 100}),
         }
         labels = {
             'solvo_number': 'Номер заявки Солво',

@@ -66,6 +66,7 @@ $(document).ready( function () {
             <th>Последнее письмо</th>
             <th>Дефект</th>
             <th>Приоритет</th>
+            <th>Критичность</th>
         </tr>
 
     </thead>
@@ -97,6 +98,16 @@ $(document).ready( function () {
         </td>
 
         <td>{{ request.era_critical_prior }}</td>
+
+        <td>
+            {% if request.era_critical_prior > 59 %}
+            Высокая
+            {% elif request.era_critical_prior > 29 %}
+            Средняя
+            {% else %}
+            Низкая
+            {% endif %}
+        </td>
 
     </tr>
 
