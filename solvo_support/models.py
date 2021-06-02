@@ -27,7 +27,7 @@ class Status(models.Model):
     list_links_id = [
         (1, 'ошибка/обращение'),
         (2, 'доработка'),
-        (3, 'дефект')
+        (3, 'дефект'),
     ]
     type_id = models.IntegerField(choices=list_links_id)  # тип статуса
     status_key = models.CharField(max_length=20)  # короткое обоздначение статуса
@@ -54,6 +54,12 @@ class RequestSolvo(models.Model):
     """
     Заявка в Солво
     """
+
+    ERA_CRITICAL_STATES = [
+        (1, 'Низкая'),
+        (2, 'Средняя'),
+        (3, 'Высокая')
+    ]
     solvo_number = models.IntegerField(unique=True)
     subject = models.CharField(max_length=255)
     description = models.TextField()
@@ -62,6 +68,7 @@ class RequestSolvo(models.Model):
     row_modified = models.DateTimeField(auto_now=True)
     comment = models.TextField(null=True, blank=True)
     is_defect_registered = models.BooleanField(default=False)
+    era_critical_state = models.ImageField(choices=ERA_CRITICAL_STATES, default=2)
     request_type = None
 
     objects = models.Manager()

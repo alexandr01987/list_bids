@@ -7,7 +7,8 @@ from .models import ErrorSolvo, RevisionSolvo, BugSolvo, CommentRequestSolvo
 class FormError(forms.ModelForm):
     class Meta:
         model = ErrorSolvo
-        fields = ('solvo_number', 'subject', 'description', 'solvo_registered_date', 'comment', 'status')
+        fields = ('solvo_number', 'subject', 'description', 'solvo_registered_date', 'comment', 'status',
+                  'era_critical_state')
         widgets = {
             'solvo_number': forms.TextInput(attrs={'rows': 1, 'cols': 30, 'readonly': 'readonly'}),
             'subject': forms.TextInput(attrs={'size': 100, 'readonly': 'readonly'}),
@@ -22,6 +23,7 @@ class FormError(forms.ModelForm):
             'comment': 'Комментарий к заявке',
             'solvo_registered_date': 'Дата регистрации',
             'status': 'Статус',
+            'era_critical_state': 'Наша критичность',
         }
 
 
@@ -29,7 +31,7 @@ class FormRevision(forms.ModelForm):
     class Meta:
         model = RevisionSolvo
         fields = ('solvo_number', 'solvo_revision_number', 'subject', 'description', 'solvo_registered_date',
-                  'hours_for_develop', 'deadline_date', 'is_accelerated', 'comment', 'status')
+                  'hours_for_develop', 'deadline_date', 'is_accelerated', 'comment', 'status', 'era_critical_state')
         widgets = {
             'solvo_number': forms.TextInput(attrs={'readonly': 'readonly'}),
             'solvo_revision_number': forms.TextInput(attrs={'size': 100, 'readonly': 'readonly'}),
@@ -51,6 +53,7 @@ class FormRevision(forms.ModelForm):
             'hours_for_develop': 'Человекочасов для выполнения',
             'deadline_date': 'Срок выполнения',
             'is_accelerated': 'Ускоренная',
+            'era_critical_state': 'Наша критичность',
         }
 
 

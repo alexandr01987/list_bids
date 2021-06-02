@@ -65,6 +65,7 @@ $(document).ready( function () {
             <th>Тема</th>
             <th>Последнее письмо</th>
             <th>Дефект</th>
+            <th>Критичность</th>
         </tr>
 
     </thead>
@@ -95,7 +96,10 @@ $(document).ready( function () {
 
         </td>
 
+        <td>{{ request.era_critical_state }}</td>
+
     </tr>
+
     {% endfor %}
 
     </tbody>
