@@ -55,7 +55,7 @@ class RequestSolvo(models.Model):
     Заявка в Солво
     """
 
-    solvo_number = models.IntegerField(unique=True)
+    solvo_number = models.IntegerField(unique=True, db_index=True)
     subject = models.CharField(max_length=255)
     description = models.TextField()
     solvo_registered_date = models.DateTimeField()
@@ -114,7 +114,8 @@ class ErrorSolvo(RequestSolvo):
     status = models.ForeignKey('Status',
                                limit_choices_to={'type_id': 1},
                                on_delete=models.PROTECT,
-                               default=1
+                               default=1,
+                               db_index=True,
                                )
     request_type = 'error'
 
@@ -130,7 +131,8 @@ class RevisionSolvo(RequestSolvo):
     status = models.ForeignKey('Status',
                                limit_choices_to={'type_id': 2},
                                on_delete=models.PROTECT,
-                               default=7
+                               default=7,
+                               db_index=True
                                )
     solvo_revision_number = models.CharField(max_length=60, unique=True)
     hours_for_develop = models.IntegerField(null=True, blank=True)
