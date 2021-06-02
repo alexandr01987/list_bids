@@ -63,7 +63,7 @@ class RequestSolvo(models.Model):
     row_modified = models.DateTimeField(auto_now=True)
     comment = models.TextField(null=True, blank=True)
     is_defect_registered = models.BooleanField(default=False)
-    era_critical_prior = models.ImageField(default=50)
+    era_critical_prior = models.IntegerField(default=50)
     request_type = None
 
     objects = models.Manager()
