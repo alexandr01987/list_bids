@@ -55,11 +55,6 @@ class RequestSolvo(models.Model):
     Заявка в Солво
     """
 
-    ERA_CRITICAL_STATES = [
-        (1, 'Низкая'),
-        (2, 'Средняя'),
-        (3, 'Высокая')
-    ]
     solvo_number = models.IntegerField(unique=True)
     subject = models.CharField(max_length=255)
     description = models.TextField()
@@ -68,7 +63,7 @@ class RequestSolvo(models.Model):
     row_modified = models.DateTimeField(auto_now=True)
     comment = models.TextField(null=True, blank=True)
     is_defect_registered = models.BooleanField(default=False)
-    era_critical_state = models.ImageField(choices=ERA_CRITICAL_STATES, default=2)
+    era_critical_prior = models.ImageField(default=50)
     request_type = None
 
     objects = models.Manager()

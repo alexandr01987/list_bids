@@ -8,13 +8,13 @@ class FormError(forms.ModelForm):
     class Meta:
         model = ErrorSolvo
         fields = ('solvo_number', 'subject', 'description', 'solvo_registered_date', 'comment', 'status',
-                  'era_critical_state')
+                  'era_critical_prior')
         widgets = {
             'solvo_number': forms.TextInput(attrs={'rows': 1, 'cols': 30, 'readonly': 'readonly'}),
             'subject': forms.TextInput(attrs={'size': 100, 'readonly': 'readonly'}),
             'description': forms.Textarea(attrs={'rows': 12, 'cols': 150}),
             'comment': forms.Textarea(attrs={'rows': 2, 'cols': 60}),
-            # 'solvo_registered_date': forms.SelectDateWidget()
+            'era_critical_prior': forms.NumberInput(attrs={'min': 0, 'max': 200}),
         }
         labels = {
             'solvo_number': 'Номер заявки Солво',
@@ -23,7 +23,7 @@ class FormError(forms.ModelForm):
             'comment': 'Комментарий к заявке',
             'solvo_registered_date': 'Дата регистрации',
             'status': 'Статус',
-            'era_critical_state': 'Наша критичность',
+            'era_critical_prior': 'Приоритет',
         }
 
 
@@ -31,7 +31,7 @@ class FormRevision(forms.ModelForm):
     class Meta:
         model = RevisionSolvo
         fields = ('solvo_number', 'solvo_revision_number', 'subject', 'description', 'solvo_registered_date',
-                  'hours_for_develop', 'deadline_date', 'is_accelerated', 'comment', 'status', 'era_critical_state')
+                  'hours_for_develop', 'deadline_date', 'is_accelerated', 'comment', 'status', 'era_critical_prior')
         widgets = {
             'solvo_number': forms.TextInput(attrs={'readonly': 'readonly'}),
             'solvo_revision_number': forms.TextInput(attrs={'size': 100, 'readonly': 'readonly'}),
@@ -39,8 +39,8 @@ class FormRevision(forms.ModelForm):
             'description': forms.Textarea(attrs={'rows': 6, 'cols': 150}),
             'comment': forms.Textarea(attrs={'rows': 3, 'cols': 60}),
             'hours_for_develop': forms.NumberInput(attrs={'min': 0}),
-            # 'solvo_registered_date': forms.SelectDateWidget(),
-            'deadline_date': forms.SelectDateWidget()
+            'deadline_date': forms.SelectDateWidget(),
+            'era_critical_prior': forms.NumberInput(attrs={'min': 0, 'max': 200}),
         }
         labels = {
             'solvo_number': 'Номер заявки Солво',
@@ -53,7 +53,7 @@ class FormRevision(forms.ModelForm):
             'hours_for_develop': 'Человекочасов для выполнения',
             'deadline_date': 'Срок выполнения',
             'is_accelerated': 'Ускоренная',
-            'era_critical_state': 'Наша критичность',
+            'era_critical_prior': 'Приоритет',
         }
 
 
