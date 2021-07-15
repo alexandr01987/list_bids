@@ -3,10 +3,13 @@ from django.shortcuts import render, get_object_or_404, get_list_or_404
 from django.http import Http404, HttpResponse, HttpResponseRedirect
 from django.contrib.auth.decorators import login_required, permission_required
 from django.db.models import ObjectDoesNotExist
+from rest_framework import viewsets
+from rest_framework.response import Response
 from datetime import datetime
 from .models import RequestSolvo, ErrorSolvo, RevisionSolvo, EmailSolvo, BugSolvo, RequestBugSolvo, Status
 from .forms import FormError, FormRevision, FormBug, FormCommentOnRequest
 import solvo_support.advanced_procedures as adv_proc
+from .serializers import RequestSolvoSerializer
 
 # Create your views here.
 
@@ -78,10 +81,8 @@ def find_requests_by_text(request):
         context['solvo_requests_list'] = list_found_requests
         context['type_requests'] = 'found_by_emails'
         context['key_word'] = search_text
+        context['h1_body_header'] = f'Поиск в письмах по тексту "{search_text}"'
     return render(request, 'solvo_support/search_in_emails.html', context)
-    #     return render(request, 'solvo_support/list_requests.html', context)
-    # else:
-    #     return render(request, 'solvo_support/search_in_emails.html', context)
 
 
 @permission_required('solvo_support.view_requestsolvo')
@@ -96,7 +97,6 @@ def list_requests(request, status_requests, type_requests):
     """
     # классы для получения заявок
     solvo_requests_list = []  # список для возврата
-    h1_body_header = ''
     if status_requests == 'everyone':
         if type_requests != 'all' and type_requests in classes_for_list_dict.keys():
             solvo_requests_list = get_list_or_404(classes_for_list_dict[type_requests]['class_name'])
@@ -321,3 +321,9 @@ def call_procedures(request, name_of_procedure=None):
             return HttpResponse(f'Процедура {name_of_procedure} выполнена')
         else:
             return HttpResponse(f'ошибка')
+
+
+class SolvoRequestSet(viewsets.ModelViewSet):
+    queryset = RequestSolvo.objects.all().order_by('-solvo_number')
+    serializer_class = RequestSolvoSerializer
+    lookup_field = 'solvo_number'

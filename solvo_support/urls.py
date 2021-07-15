@@ -1,11 +1,14 @@
 # -*- coding: utf-8 -*-
 from django.urls import path, include
+from rest_framework.routers import DefaultRouter
 from . import views
 
-
+api_router = DefaultRouter()
+api_router.register(r'solvo_requests', views.SolvoRequestSet, basename='solvo_requests')
 app_name = 'solvo_support'
 
 urlpatterns = [
+    path('api/', include(api_router.urls)),
     path('list-requests/<status_requests>/<type_requests>', views.list_requests, name='list-requests'),
     path('request-details/<type_request>/<solvo_number>', views.request_details, name='request-details'),
     path('change-request/<type_request>/<solvo_request_number>', views.change_request, name='change-request'),
